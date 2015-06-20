@@ -1,5 +1,7 @@
+shouldn't have to commit build folder should I?
 Should load react and the transformer with browserfy, webpack, require or somesuch
 add underscore and bacon at least
+or maybe just flow and immutable?
 http://jslog.com/2014/10/02/react-with-webpack-part-1/
 http://blog.hertzen.com/post/102991359167/flux-inspired-reactive-data-flow-using-react-and
 https://www.npmjs.com/package/react

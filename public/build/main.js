@@ -1,28 +1,32 @@
-//TODO globals are bad create class using function
-var items = ['magic wand', 'potato', 'treasure chest', 'magic carpet', 'sentient small german car'];
+var ImpossibleStore = (function () {
+    var items = ['magic wand', 'potato', 'treasure chest', 'magic carpet', 'small sentient german car'];
 
-//TODO bah! saving state! try bacon to get rid of this
-var current_item = items[0];
+    //TODO bah! saving state! try bacon or flux to get rid of this
+    var index = 0;
 
-var ImpossibleStore = React.createClass({displayName: "ImpossibleStore",
-    getInitialState: function () {
-        return {current_item: current_item};
-    },
-    next_click: function () {
-    },
-    render: function () {
-        return (
-            React.createElement("div", null, 
-                React.createElement("h1", null, "Impossible Store"), 
-                React.createElement("p", null, "previous"), 
-                React.createElement("p", null, this.props.item_name), 
-                React.createElement("p", null, "next")
-            )
-        );
-    }
-});
-
-React.render(
-    React.createElement(ImpossibleStore, {item_name: 'magic wand'}),
-    document.getElementById('impossiblestore')
-);
+    return React.createClass({
+        getInitialState: function () {
+            return {current_item: items[index]};
+        },
+        previous_click: function () {
+            index = index !== 0 ? index - 1 : index;
+            this.setState({current_item: items[index]});
+        },
+        next_click: function () {
+            index = index < (items.length - 1) ? index + 1 : index;
+            this.setState({current_item: items[index]});
+        },
+        render: function () {
+            return (
+                React.createElement("div", null, 
+                    React.createElement("h1", null, "Impossible Store"), 
+                    React.createElement("p", null, this.state.current_item), 
+                    React.createElement("p", null, 
+                        React.createElement("span", {class: "previous", onClick: this.previous_click}, "previous"), 
+                        React.createElement("span", {class: "next", onClick: this.next_click}, "next")
+                    )
+                )
+            );
+        }
+    });
+}());
