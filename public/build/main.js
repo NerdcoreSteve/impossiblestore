@@ -30,3 +30,5 @@ var ImpossibleStore = (function () {
         }
     });
 }());
+
+React.render(React.createElement(ImpossibleStore, null), document.getElementById('impossiblestore'));
