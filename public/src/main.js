@@ -8,11 +8,13 @@ var ImpossibleStore = (function () {
         getInitialState: function () {
             return {current_item: items[index]};
         },
-        previous_click: function () {
+        previous_click: function (e) {
+            e.preventDefault();
             index = index !== 0 ? index - 1 : index;
             this.setState({current_item: items[index]});
         },
-        next_click: function () {
+        next_click: function (e) {
+            e.preventDefault();
             index = index < (items.length - 1) ? index + 1 : index;
             this.setState({current_item: items[index]});
         },
@@ -22,8 +24,8 @@ var ImpossibleStore = (function () {
                     <h1>Impossible Store</h1>
                     <p>{this.state.current_item}</p>
                     <p>
-                        <span class='previous' onClick={this.previous_click}>previous</span>
-                        <span class='next' onClick={this.next_click}>next</span>
+                        <a href="" className='previous' onClick={this.previous_click}>previous</a>
+                        <a href="" className='next' onClick={this.next_click}>next</a>
                     </p>
                 </div>
             );

@@ -8,11 +8,13 @@ var ImpossibleStore = (function () {
         getInitialState: function () {
             return {current_item: items[index]};
         },
-        previous_click: function () {
+        previous_click: function (e) {
+            e.preventDefault();
             index = index !== 0 ? index - 1 : index;
             this.setState({current_item: items[index]});
         },
-        next_click: function () {
+        next_click: function (e) {
+            e.preventDefault();
             index = index < (items.length - 1) ? index + 1 : index;
             this.setState({current_item: items[index]});
         },
@@ -22,8 +24,8 @@ var ImpossibleStore = (function () {
                     React.createElement("h1", null, "Impossible Store"), 
                     React.createElement("p", null, this.state.current_item), 
                     React.createElement("p", null, 
-                        React.createElement("span", {class: "previous", onClick: this.previous_click}, "previous"), 
-                        React.createElement("span", {class: "next", onClick: this.next_click}, "next")
+                        React.createElement("a", {href: "", className: "previous", onClick: this.previous_click}, "previous"), 
+                        React.createElement("a", {href: "", className: "next", onClick: this.next_click}, "next")
                     )
                 )
             );
