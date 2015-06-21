@@ -1,12 +1,16 @@
 shouldn't have to commit build folder should I?
 Should load react and the transformer with browserfy, webpack, require or somesuch
+    tried requirejs, was slow to load
 add underscore and bacon at least
-or maybe just flow and immutable?
+or maybe just flow
+what about immutable and their other libraries
 http://jslog.com/2014/10/02/react-with-webpack-part-1/
 http://blog.hertzen.com/post/102991359167/flux-inspired-reactive-data-flow-using-react-and
 https://www.npmjs.com/package/react
 https://github.com/facebook/react/wiki/Complementary-Tools
 css http://www.myth.io/
+
+make bootstrap part of your build system.
 
 make responsive design
 make this in react native too
