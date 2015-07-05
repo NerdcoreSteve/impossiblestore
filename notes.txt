@@ -1,6 +1,6 @@
 I can render views server side? Need to do that for first page load.
 shouldn't have to commit build folder should I?
-Should load react and the transformer with browserfy, webpack, require or somesuch
+Should load react and the transformer with browserfy, webpack, ES6 modules or somesuch
     tried requirejs, was slow to load
 add underscore and bacon at least
 or maybe just flow
@@ -10,6 +10,8 @@ http://blog.hertzen.com/post/102991359167/flux-inspired-reactive-data-flow-using
 https://www.npmjs.com/package/react
 https://github.com/facebook/react/wiki/Complementary-Tools
 css http://www.myth.io/
+
+Can I use another ES6 transpiler? One with tail recursion optimization
 
 make responsive design
 make this in react native too

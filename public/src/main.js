@@ -1,3 +1,8 @@
+//http://stackoverflow.com/questions/149055/how-can-i-format-numbers-as-money-in-javascript
+function format_as_money(number) {
+    return "KU " + number.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+}
+
 var ImpossibleStore = (function () {
     var items = [
         {
@@ -21,13 +26,13 @@ var ImpossibleStore = (function () {
         {
             name: "Flying Carpet",
             brand: "Gentle Genie",
-            description: "Gentle Genie brand Flying carpets are perfect for ",
+            description: "Gentle Genie brand Flying carpets are perfect for kids going on their first adventures or urban professionals tired of their congested commutes. With features like an onboard inertial dampening spell, seat belts, and a pouche of holding with a 3,000 cubic quantar capacity, Gentle Genie brand flying carpets have been rated the best in their class by Magical Vehicles Monthly for the last 5 years.",
             price: 81000
         },
         {
             name: "Sentient Small German Car",
             brand: "Dependable Deliveries",
-            description: "Germany exists in multiple realities: earth, saturn, and nebular 4.",
+            description: "The natural phenomena of small cars from Germany (a country that exists in many realities, most commonly on Earth, Saturn, and Nebular 4) coming to life and becoming the best friend of you and/or your children while also becoming the catalyst for an adventure or quest is well known in scientific circles. What is less well known is that there is a surplus of these magical cars yearning to be part of a family. At Dependable Deliveries we pride ourselves on finding the right magical car for you and/or your children. (Please note, you will not be purchasing the car itself as they are defined as people by the Lunar Accords, instead you will be purchasing the delivery of the car. What happens next is up to you and your new metal friend!)",
             price: 10000
         }
     ];
@@ -54,7 +59,7 @@ var ImpossibleStore = (function () {
                 <div>
                     <h1>Impossible Store</h1>
                     <div>Item: {this.state.current_item.name}</div>
-                    <div>Price: {this.state.current_item.price}</div>
+                    <div>Price: {format_as_money(this.state.current_item.price)}</div>
                     <div>Brand: {this.state.current_item.brand}</div>
                     <div>Description:</div>
                     <div>{this.state.current_item.description}</div>
