@@ -1,8 +1,14 @@
+var React = require('react');
+var Alert = require('react-bootstrap').Alert;
+
 //http://stackoverflow.com/questions/149055/how-can-i-format-numbers-as-money-in-javascript
 function format_as_money(number) {
     return "KU " + number.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
 }
 
+console.log(Alert);
+
+//TODO items should not be saved in the react component
 var ImpossibleStore = (function () {
     var items = [
         {
