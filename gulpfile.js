@@ -11,7 +11,12 @@ gulp.task("default", function () {
         .transform(babelify)
         .require("public/src/main.js", { entry: true })
         .bundle()
-        .on("error", function (err) { console.log("Error: " + err.message); })
+        .on(
+            "error",
+            function (err) {
+                console.log("Error: " + err.message);
+                this.emit('end');
+            })
         .pipe(fs.createWriteStream("public/build/bundle.js"));
 });
 

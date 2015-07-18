@@ -1,14 +1,19 @@
 var React = require('react');
-var Alert = require('react-bootstrap').Alert;
+var Bootstrap = require('react-bootstrap');
+var Button = Bootstrap.Button;
+var ButtonGroup = Bootstrap.ButtonGroup;
+var Panel = Bootstrap.Panel;
+var PageHeader = Bootstrap.PageHeader;
 
 //http://stackoverflow.com/questions/149055/how-can-i-format-numbers-as-money-in-javascript
-function format_as_money(number) {
+function money_formatter(number) {
     return "KU " + number.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
 }
 
-console.log(Alert);
-
 //TODO items should not be saved in the react component
+//TODO break this component up into smaller components
+//TODO make jsx in their own jsx files
+//TODO use pagers instead of buttons for prev and next?
 var ImpossibleStore = (function () {
     var items = [
         {
@@ -50,6 +55,7 @@ var ImpossibleStore = (function () {
         getInitialState: function () {
             return {current_item: items[index]};
         },
+        //TODO should I be using a router instead of these functions
         previous_click: function (e) {
             e.preventDefault();
             index = index !== 0 ? index - 1 : index;
@@ -61,18 +67,23 @@ var ImpossibleStore = (function () {
             this.setState({current_item: items[index]});
         },
         render: function () {
+            //TODO bold the item and brand
+            //TODO set button group width to 100%
+            //TODO buttons and stuff should not vary in size with contents changes
+            var panel_header_text =
+                `${this.state.current_item.name} made by ${this.state.current_item.brand}`;
+
             return (
                 <div>
-                    <h1>Impossible Store</h1>
-                    <div>Item: {this.state.current_item.name}</div>
-                    <div>Price: {format_as_money(this.state.current_item.price)}</div>
-                    <div>Brand: {this.state.current_item.brand}</div>
-                    <div>Description:</div>
-                    <div>{this.state.current_item.description}</div>
-                    <div>
-                        <a href="" className='previous' onClick={this.previous_click}>previous</a>
-                        <a href="" className='next' onClick={this.next_click}>next</a>
-                    </div>
+                    <PageHeader>Impossible Store</PageHeader>
+                    <Panel header={panel_header_text}>
+                        {this.state.current_item.description}
+                    </Panel>
+                    <ButtonGroup>
+                        <Button onClick={this.previous_click}>Previous</Button>
+                        <Button>Buy for {money_formatter(this.state.current_item.price)}</Button>
+                        <Button onClick={this.next_click}>Next</Button>
+                    </ButtonGroup>
                 </div>
             );
         }
