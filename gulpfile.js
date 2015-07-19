@@ -1,10 +1,7 @@
-//TODO find out what fs is
 var fs = require("fs");
 var gulp = require("gulp");
 var browserify = require("browserify");
 var babelify = require("babelify");
-
-//TODO why is it "public/src/main.js" in task and "watch" in watch?
 
 gulp.task("default", function () {
     return browserify({ debug: true })

@@ -10,10 +10,6 @@ function money_formatter(number) {
     return "KU " + number.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
 }
 
-//TODO items should not be saved in the react component
-//TODO break this component up into smaller components
-//TODO make jsx in their own jsx files
-//TODO use pagers instead of buttons for prev and next?
 var ImpossibleStore = (function () {
     var items = [
         {
@@ -53,7 +49,6 @@ var ImpossibleStore = (function () {
         }
     ];
 
-    //TODO bah! saving state! try bacon or flux to get rid of this
     var index = 0;
 
     var center_block_width = '70%';
@@ -85,7 +80,6 @@ var ImpossibleStore = (function () {
         getInitialState: function () {
             return {current_item: items[index]};
         },
-        //TODO should I be using a router instead of these functions
         previous_click: function (e) {
             e.preventDefault();
             index = index !== 0 ? index - 1 : index;
@@ -97,7 +91,6 @@ var ImpossibleStore = (function () {
             this.setState({current_item: items[index]});
         },
         render: function () {
-            //TODO bold the item and brand
             var panel_header_text =
                 `${this.state.current_item.name} made by ${this.state.current_item.brand}`;
 
