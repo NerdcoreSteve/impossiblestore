@@ -1,4 +1,9 @@
 var React = require('react');
+
+//TODO use later.
+var Router = require('react-router');
+var Route = Router.Route;
+
 var Bootstrap = require('react-bootstrap');
 var Button = Bootstrap.Button;
 var ButtonGroup = Bootstrap.ButtonGroup;
@@ -6,9 +11,39 @@ var Panel = Bootstrap.Panel;
 var PageHeader = Bootstrap.PageHeader;
 
 //http://stackoverflow.com/questions/149055/how-can-i-format-numbers-as-money-in-javascript
-function money_formatter(number) {
+var money_formatter = (number) => {
     return "KU " + number.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-}
+};
+
+var Item = React.createClass({
+    styles: {
+        image: {
+            height: '150px'
+        }
+    },
+    render: function() {
+        return (
+            <div>
+                <img style={this.styles.image} src={this.props.item.image}></img>
+                <span>{this.props.item.name} by {this.props.item.brand}</span>
+                <span>{money_formatter(this.props.item.price)}</span>
+                <Button>Details</Button>
+                <Button>Buy</Button>
+            </div>
+        );
+    }
+});
+
+var ItemList = React.createClass({
+    render: function () {
+        //TODO use lodash map
+        return (
+            <div>
+                {() => {return this.props.items.map((item) => {return <Item item={item}></Item>});}()}
+            </div>
+        );
+    }
+})
 
 var ImpossibleStore = (function () {
     var items = [
@@ -110,6 +145,7 @@ var ImpossibleStore = (function () {
                     <Panel style={panel_style} header={panel_header_text}>
                         {this.state.current_item.description}
                     </Panel>
+                    <ItemList items={items}></ItemList>
                 </div>
             );
         }
