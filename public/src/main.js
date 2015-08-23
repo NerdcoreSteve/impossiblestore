@@ -1,9 +1,5 @@
 var React = require('react');
 
-//TODO use later.
-var Router = require('react-router');
-var Route = Router.Route;
-
 var Bootstrap = require('react-bootstrap');
 var Button = Bootstrap.Button;
 var ButtonGroup = Bootstrap.ButtonGroup;
@@ -17,18 +13,37 @@ var money_formatter = (number) => {
 
 var Item = React.createClass({
     styles: {
+        container: {
+            'width': '80%',
+            'height': '300px',
+            'margin': 'auto',
+            'margin-top': '10px',
+            'margin-bottom': '10px',
+            'padding': '10px',
+            'background': '#72a747' 
+        },
         image: {
-            height: '150px'
+            'width': '150px',
+            'margin-left': '30px',
+            'margin-top': '30px'
+        },
+        inner_span: {
+            'width': '900px',
+            'float': 'right'
+        },
+        description: {
+            'height': '150px'
         }
     },
     render: function() {
         return (
-            <div>
+            <div style={this.styles.container}>
                 <img style={this.styles.image} src={this.props.item.image}></img>
-                <span>{this.props.item.name} by {this.props.item.brand}</span>
-                <span>{money_formatter(this.props.item.price)}</span>
-                <Button>Details</Button>
-                <Button>Buy</Button>
+                <span style={this.styles.inner_span}>
+                    <div>{this.props.item.name} by {this.props.item.brand}</div>
+                    <div style={this.styles.description}>{this.props.item.description}</div>
+                    <Button>Buy for {money_formatter(this.props.item.price)}</Button>
+                </span>
             </div>
         );
     }
@@ -36,7 +51,6 @@ var Item = React.createClass({
 
 var ItemList = React.createClass({
     render: function () {
-        //TODO use lodash map
         return (
             <div>
                 {() => {return this.props.items.map((item) => {return <Item item={item}></Item>});}()}
@@ -84,67 +98,11 @@ var ImpossibleStore = (function () {
         }
     ];
 
-    var index = 0;
-
-    var center_block_width = '70%';
-
-    var panel_style = {
-        height: '250px',
-        width: center_block_width
-    };
-
-    var image_container_style = {
-        width: center_block_width
-    }
-
-    var item_image_style = {
-        height: '300px',
-        display: 'block',
-        margin: '0 auto'
-    };
-
-    var button_style = {
-        width: '33%'
-    };
-
-    var button_group_style = {
-        width: center_block_width
-    };
-
     return React.createClass({
-        getInitialState: function () {
-            return {current_item: items[index]};
-        },
-        previous_click: function (e) {
-            e.preventDefault();
-            index = index !== 0 ? index - 1 : index;
-            this.setState({current_item: items[index]});
-        },
-        next_click: function (e) {
-            e.preventDefault();
-            index = index < (items.length - 1) ? index + 1 : index;
-            this.setState({current_item: items[index]});
-        },
         render: function () {
-            var panel_header_text =
-                `${this.state.current_item.name} made by ${this.state.current_item.brand}`;
-
             return (
                 <div>
                     <PageHeader>Impossible Store</PageHeader>
-                    <ButtonGroup style={button_group_style}>
-                        <Button style={button_style} onClick={this.previous_click}>Previous</Button>
-                        <Button style={button_style}>
-                            Buy for {money_formatter(this.state.current_item.price)}
-                        </Button>
-                        <Button style={button_style} onClick={this.next_click}>Next</Button>
-                    </ButtonGroup>
-                    <div style={image_container_style}>
-                        <img style={item_image_style} src={this.state.current_item.image}></img>
-                    </div>
-                    <Panel style={panel_style} header={panel_header_text}>
-                        {this.state.current_item.description}
-                    </Panel>
                     <ItemList items={items}></ItemList>
                 </div>
             );
